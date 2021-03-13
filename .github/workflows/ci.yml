@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Build docker image for testing
+        run: docker build -t app/docker-react -f Dockerfile.dev .
       - name: Run tests
-        run: |
-          docker build -t app/docker-react -f Dockerfile.dev .
-          docker run -e CI=true app/docker-react npm run test -- --coverage
+        run: docker run -e CI=true app/docker-react npm run test -- --coverage
